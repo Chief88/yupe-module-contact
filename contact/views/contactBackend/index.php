@@ -58,6 +58,7 @@ $this->menu = array(
                 array('class' => 'form-control', 'encode' => false, 'empty' => '')
             ),
         ),
+        'name',
         array(
             'name'   => 'category_id',
             'value'  => '$data->getCategoryName()',

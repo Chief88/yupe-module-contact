@@ -6,6 +6,7 @@ class GetContactWidget extends yupe\widgets\YWidget{
     public $view = 'listContacts';
     public $itemDelimiter = ',';
     public $categoryId;
+    public $params = [];
 
     public function init(){
 
@@ -17,24 +18,25 @@ class GetContactWidget extends yupe\widgets\YWidget{
         $criteria->with[] = 'contactType';
         if( empty($this->categoryId) ){
             $criteria->condition = 'contactType.name = :name';
-            $criteria->params = array(
+            $criteria->params = [
                 ':name' => $this->nameContact,
-            );
+            ];
         }else{
             $criteria->with[] = 'category';
             $criteria->condition = 'contactType.name = :name AND category.id = :categoryId';
-            $criteria->params = array(
+            $criteria->params = [
                 ':name' => $this->nameContact,
                 ':categoryId' => $this->categoryId,
-            );
+            ];
         }
 
         $contacts = Contact::model()->findAll($criteria);
 
-        $this->render($this->view, array(
+        $this->render($this->view, [
             'contacts' => $contacts,
             'itemDelimiter' => $this->itemDelimiter,
-        ));
+            'params' => $this->params
+        ]);
 
     }
 }

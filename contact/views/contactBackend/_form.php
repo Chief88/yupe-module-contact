@@ -49,6 +49,15 @@
 
 <div class="row">
     <div class="col-sm-7">
+        <?php echo $form->textFieldGroup(
+            $model,
+            'name'
+        ); ?>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-7">
         <?php echo $form->textAreaGroup($model, 'data'); ?>
     </div>
 </div>

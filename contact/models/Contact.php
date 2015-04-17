@@ -36,6 +36,7 @@ class Contact extends yupe\models\YModel{
             'data'          => 'Контактная информация',
             'type_id'       => 'Тип контакта',
             'category_id'   => 'Категория',
+            'name'          => 'Имя',
         );
     }
 
@@ -57,8 +58,9 @@ class Contact extends yupe\models\YModel{
             array('data, type_id', 'required'),
             array('data', 'validatePhone', 'on'=>'phone'),
             array('data', 'email', 'on'=>'email'),
+            array('name', 'length', 'max' => 250),
             array('category_id, data', 'numerical', 'integerOnly' => true, 'on'=>'integer'),
-            array('category_id, data, type_id', 'safe'),
+            array('name, category_id, data, type_id', 'safe'),
         );
     }
 
@@ -89,6 +91,7 @@ class Contact extends yupe\models\YModel{
         $criteria->compare('data', $this->data, true);
         $criteria->compare('type_id', $this->type_id);
         $criteria->compare('category_id', $this->category_id, true);
+        $criteria->compare('name', $this->name, true);
 
         return new CActiveDataProvider(get_class($this), array(
             'criteria' => $criteria,

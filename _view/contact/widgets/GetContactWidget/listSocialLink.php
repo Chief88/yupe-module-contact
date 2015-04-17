@@ -18,8 +18,10 @@
         foreach($contacts as $i =>$contact){
 
             $list .= isset($wrapper) ?
-                '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.$contact->data.'</'.$wrapper.'>' :
-                $contact->data;
+                '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.
+                '<a href="'. $contact->data .'" class="classic" target="_blank">'. $contact->name .'</a>'.
+                '</'.$wrapper.'>' :
+                '<a href="'. $contact->data .'" class="classic" target="_blank">'. $contact->name .'</a>';
 
             if($i + 1 < count($contacts)){
                 $list .= $itemDelimiter;
