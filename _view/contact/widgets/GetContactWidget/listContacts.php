@@ -15,6 +15,20 @@
 
         }
 
+        if( isset($params['itemsWrapper']) && !empty($params['itemsWrapper']) ){
+            $itemsWrapper = $params['itemsWrapper'];
+            $htmlOptions = [];
+            if( isset($params['htmlOptions']) && !empty($params['htmlOptions']) ){
+                $htmlOptions = $params['htmlOptions'];
+            }
+
+            $htmlOptionsString = '';
+            foreach($htmlOptions as $key => $option ){
+                $htmlOptionsString .= $key.'=\''.$option.'\' ';
+            }
+
+        }
+
         foreach($contacts as $i =>$contact){
 
             $list .= isset($wrapper) ?
@@ -25,6 +39,9 @@
                 $list .= $itemDelimiter;
             }
         }
-        echo $list; ?>
+
+        $list = isset($params['itemsPrefix']) ? $params['itemsPrefix'].$list : $list;
+
+        echo isset($itemsWrapper) ? '<'. $itemsWrapper .' '. $htmlOptionsString .'>'.$list.'</'.$itemsWrapper.'>' : $list; ?>
 
 <?php endif; ?>
