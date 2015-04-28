@@ -29,11 +29,13 @@
 
         }
 
+        $typeContact = isset($params['type']) ? $params['type'] : '';
+
         foreach($contacts as $i =>$contact){
 
-            $list .= isset($wrapper) ?
-                '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.$contact->data.'</'.$wrapper.'>' :
-                $contact->data;
+            $item = $typeContact == 'email' ? '<a href="mailto:'.$contact->data.'">'.$contact->data.'</a>' : $contact->data;
+
+            $list .= isset($wrapper) ? '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.$item.'</'.$wrapper.'>' : $item;
 
             if($i + 1 < count($contacts)){
                 $list .= $itemDelimiter;
