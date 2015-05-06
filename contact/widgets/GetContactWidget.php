@@ -6,6 +6,7 @@ class GetContactWidget extends yupe\widgets\YWidget{
     public $view = 'listContacts';
     public $itemDelimiter = ',';
     public $categoryId;
+    public $limit = false;
     public $params = [];
 
     public function init(){
@@ -35,6 +36,10 @@ class GetContactWidget extends yupe\widgets\YWidget{
                     ':categoryId' => $this->categoryId,
                 ];
             }
+        }
+
+        if($this->limit){
+            $criteria->limit = $this->limit;
         }
 
         $contacts = Contact::model()->findAll($criteria);
