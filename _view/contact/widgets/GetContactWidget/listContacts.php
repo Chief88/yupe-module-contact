@@ -29,11 +29,9 @@
 
         }
 
-        $typeContact = isset($params['type']) ? $params['type'] : '';
-
         foreach($contacts as $i =>$contact){
 
-            $item = $typeContact == 'email' ? '<a href="mailto:'.$contact->data.'">'.$contact->data.'</a>' : $contact->data;
+            $item = $contact->contactType->validation == 'email' ? '<a href="mailto:'.$contact->data.'">'.$contact->data.'</a>' : $contact->data;
 
             $list .= isset($wrapper) ? '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.$item.'</'.$wrapper.'>' : $item;
 
@@ -43,6 +41,7 @@
         }
 
         $list = isset($params['itemsPrefix']) ? $params['itemsPrefix'].$list : $list;
+        $list = isset($params['itemsPostfix']) ? $list.$params['itemsPostfix'] : $list;
 
         echo isset($itemsWrapper) ? '<'. $itemsWrapper .' '. $htmlOptionsString .'>'.$list.'</'.$itemsWrapper.'>' : $list; ?>
 

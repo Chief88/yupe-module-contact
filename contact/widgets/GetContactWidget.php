@@ -23,11 +23,18 @@ class GetContactWidget extends yupe\widgets\YWidget{
             ];
         }else{
             $criteria->with[] = 'category';
-            $criteria->condition = 'contactType.name = :name AND category.id = :categoryId';
-            $criteria->params = [
-                ':name' => $this->nameContact,
-                ':categoryId' => $this->categoryId,
-            ];
+            if($this->categoryId == 'all'){
+                $criteria->condition = 't.category_id != :categoryId';
+                $criteria->params = [
+                    ':categoryId' => 'NULL',
+                ];
+            }else{
+                $criteria->condition = 'contactType.name = :name AND category.id = :categoryId';
+                $criteria->params = [
+                    ':name' => $this->nameContact,
+                    ':categoryId' => $this->categoryId,
+                ];
+            }
         }
 
         $contacts = Contact::model()->findAll($criteria);
