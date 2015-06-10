@@ -32,12 +32,13 @@ class Contact extends yupe\models\YModel{
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'data'          => 'Контактная информация',
             'type_id'       => 'Тип контакта',
             'category_id'   => 'Категория',
             'name'          => 'Имя',
-        );
+            'image'         => 'Картинка',
+        ];
     }
 
     public function beforeValidate(){
@@ -54,14 +55,20 @@ class Contact extends yupe\models\YModel{
      */
     public function rules()
     {
-        return array(
-            array('data, type_id', 'required'),
-            array('data', 'validatePhone', 'on'=>'phone'),
-            array('data', 'email', 'on'=>'email'),
-            array('name', 'length', 'max' => 250),
-            array('category_id, data', 'numerical', 'integerOnly' => true, 'on'=>'integer'),
-            array('name, category_id, data, type_id', 'safe'),
-        );
+        return [
+            ['data, type_id', 'required'],
+//            ['data', 'validatePhone', 'on'=>'phone'],
+            ['data',
+                'match',
+                'pattern' => '/^((8|\+7)[\- ]?)?(\(?\d{3,4}\)?[\- ]?)?[\d\- ]{5,10}$/',
+                'message' => 'Неверный формат телефона',
+                'on'=>'phone'
+            ],
+            ['data', 'email', 'on'=>'email'],
+            ['image, name', 'length', 'max' => 250],
+            ['category_id, data', 'numerical', 'integerOnly' => true, 'on'=>'integer'],
+            ['image, name, category_id, data, type_id', 'safe'],
+        ];
     }
 
     public function validatePhone($attribute){
@@ -72,15 +79,37 @@ class Contact extends yupe\models\YModel{
 
     }
 
+    public function behaviors()
+    {
+        $module = Yii::app()->getModule('contact');
+
+        return [
+            'imageUpload' => [
+                'class'         => 'yupe\components\behaviors\ImageUploadBehavior',
+                'attributeName' => 'image',
+                'uploadPath'    => $module->uploadPath,
+                'resizeOptions' => [
+                    'width'   => 9999,
+                    'height'  => 9999,
+                    'quality' => [
+                        'jpegQuality'         => 100,
+                        'pngCompressionLevel' => 10
+                    ],
+                ],
+                'defaultImage'   => $module->getAssetsUrl() . '/img/nophoto.jpg',
+            ],
+        ];
+    }
+
     /**
      * @return array relational rules.
      */
     public function relations()
     {
-        return array(
-            'category' => array(self::BELONGS_TO, 'Category', 'category_id'),
-            'contactType'  => array(self::BELONGS_TO, 'ContactType', 'type_id'),
-        );
+        return [
+            'category' => [self::BELONGS_TO, 'Category', 'category_id'],
+            'contactType'  => [self::BELONGS_TO, 'ContactType', 'type_id'],
+        ];
     }
 
     public function search()
@@ -93,18 +122,18 @@ class Contact extends yupe\models\YModel{
         $criteria->compare('category_id', $this->category_id, true);
         $criteria->compare('name', $this->name, true);
 
-        return new CActiveDataProvider(get_class($this), array(
+        return new CActiveDataProvider(get_class($this), [
             'criteria' => $criteria,
-        ));
+        ]);
     }
 
     public function category($category_id){
 
         $this->getDbCriteria()->mergeWith(
-            array(
+            [
                 'condition' => 'category_id = :category_id',
-                'params'    => array(':category_id' => $category_id),
-            )
+                'params'    => [':category_id' => $category_id],
+            ]
         );
 
         return $this;

@@ -17,13 +17,11 @@
 
         foreach($contacts as $i =>$contact){
 
-            $image = !empty($contact->image) ? '<img src="'. $contact->getImageUrl() .'" alt="" />' : '';
-
             $list .= isset($wrapper) ?
                 '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.
-                '<a href="'. $contact->data .'" class="classic" target="_blank">'. $image . $contact->name .'</a>'.
+                '<a href="'. $contact->data .'" class="" target="_blank">'. $contact->name .'</a>'.
                 '</'.$wrapper.'>' :
-                '<a href="'. $contact->data .'" class="classic" target="_blank">'.$image . $contact->name .'</a>';
+                '<a href="'. $contact->data .'" class="" target="_blank">'. $contact->name .'</a>';
 
             if($i + 1 < count($contacts)){
                 $list .= $itemDelimiter;

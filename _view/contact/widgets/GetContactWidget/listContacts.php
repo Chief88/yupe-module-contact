@@ -1,8 +1,8 @@
 <?php if(!empty($contacts)): ?>
 
         <?php $list = '';
-        if( isset($params['wrapper']) && !empty($params['wrapper']) ){
-            $wrapper = $params['wrapper'];
+        if( isset($params['wrapperTagName']) && !empty($params['wrapperTagName']) ){
+            $wrapper = $params['wrapperTagName'];
             $wrapperHtmlOptions = [];
             if( isset($params['wrapperHtmlOptions']) && !empty($params['wrapperHtmlOptions']) ){
                 $wrapperHtmlOptions = $params['wrapperHtmlOptions'];

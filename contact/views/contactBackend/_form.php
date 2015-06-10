@@ -56,6 +56,41 @@
     </div>
 </div>
 
+<div class='row'>
+    <div class="col-sm-7">
+        <?php
+        echo CHtml::image(
+            !$model->isNewRecord && $model->image ? $model->getImageUrl() : '#',
+            $model->name,
+            [
+                'class' => 'preview-image',
+                'style' => !$model->isNewRecord && $model->image ? '' : 'display:none'
+            ]
+        ); ?>
+
+        <?php if (!$model->isNewRecord && $model->image): ?>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="delete-file"> <?= Yii::t('ContactModule.contact', 'Delete the file') ?>
+                </label>
+            </div>
+        <?php endif; ?>
+
+        <?php echo $form->fileFieldGroup(
+            $model,
+            'image',
+            [
+                'widgetOptions' => [
+                    'htmlOptions' => [
+                        'onchange' => 'readURL(this);',
+                        'style'    => 'background-color: inherit;'
+                    ]
+                ]
+            ]
+        ); ?>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-sm-7">
         <?php echo $form->textAreaGroup($model, 'data'); ?>
