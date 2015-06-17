@@ -35,7 +35,13 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
             $model->attributes = $_POST['Contact'];
             if($model->validate()){
                 $model->save();
-                $this->redirect(array('index'));
+
+                $this->redirect(
+                    (array)Yii::app()->getRequest()->getPost(
+                        'submit-type',
+                        array('create')
+                    )
+                );
             }
         }
 
