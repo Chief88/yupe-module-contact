@@ -108,7 +108,7 @@ class ContactModule extends WebModule
 
     public function getAuthor()
     {
-        return Yii::t($this->aliasModule, 'Adelfo-Studio');
+        return Yii::t($this->aliasModule, 'Sergey Latyshkov');
     }
 
     public function getAuthorEmail()
@@ -118,7 +118,7 @@ class ContactModule extends WebModule
 
     public function getUrl()
     {
-        return Yii::t($this->aliasModule, 'http://adelfo-studio.ru/');
+        return Yii::t($this->aliasModule, 'https://github.com/Chief88/yupe-module-contact.git');
     }
 
     public function getIcon()
