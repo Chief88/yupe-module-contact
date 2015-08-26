@@ -1,33 +1,33 @@
 <?php
 $this->breadcrumbs = [
-    'Контакты' => [$this->patchBackend.'index'],
-    'Список',
+    Yii::t($this->aliasModule, 'Contacts') => [$this->patchBackend.'index'],
+    Yii::t($this->aliasModule, 'List'),
 ];
 
-$this->pageTitle = 'Список контактов';
+$this->pageTitle = Yii::t($this->aliasModule, 'List contacts');
 
 $this->menu = [
     [
-        'label' => 'Контакты',
+        'label' => Yii::t($this->aliasModule, 'Contacts'),
         'items' => [
             [
                 'icon' => 'list-alt',
-                'label' => 'Список контактов',
+                'label' => Yii::t($this->aliasModule, 'List contacts'),
                 'url' => [$this->patchBackend.'index']
             ],
             [
                 'icon' => 'plus-sign',
-                'label' => 'Добавить контакт',
+                'label' => Yii::t($this->aliasModule, 'Add contact'),
                 'url' => [$this->patchBackend.'create']
             ],
         ]
     ],
     [
-        'label' => 'Типы контактов',
+        'label' => Yii::t($this->aliasModule, 'Contact types'),
         'items' => [
             [
                 'icon' => 'list-alt',
-                'label' => 'Список типов',
+                'label' => Yii::t($this->aliasModule, 'List types'),
                 'url' => ['/contact/contactTypeBackend/index']
             ],
         ]
@@ -37,12 +37,12 @@ $this->menu = [
 
 <div class="page-header">
     <h1>
-        <?php echo 'Контакты'; ?>
-        <small><?php echo 'список'; ?></small>
+        <?= Yii::t($this->aliasModule, 'Contacts'); ?>
+        <small><?= Yii::t($this->aliasModule, 'list'); ?></small>
     </h1>
 </div>
 
-    <p><?php echo 'На данной странице представлены средства управления контактами.'; ?></p>
+    <p><?= Yii::t($this->aliasModule, 'Contact management'); ?></p>
 
 <?php $this->widget('yupe\widgets\CustomGridView', [
     'id'           => 'contact-grid',

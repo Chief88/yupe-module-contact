@@ -1,21 +1,29 @@
 <?php
 $this->breadcrumbs = [
-    'Контакты' => [$this->patchBackend.'index'],
-    'Добавление',
+    Yii::t($this->aliasModule, 'Contacts') => [$this->patchBackend.'index'],
+    Yii::t($this->aliasModule, 'Creation'),
 ];
 
-$this->pageTitle = 'Добавить новые контакты';
+$this->pageTitle = Yii::t($this->aliasModule, 'Add new contact');
 
 $this->menu = [
-    ['icon' => 'list-alt', 'label' => 'Просмотреть список контактов',
-    'url' => [$this->patchBackend.'index']],
+    [
+        'label' => Yii::t($this->aliasModule, 'Contacts'),
+        'items' => [
+            [
+                'icon' => 'list-alt',
+                'label' => Yii::t($this->aliasModule, 'List contacts'),
+                'url' => [$this->patchBackend.'index']
+            ]
+        ],
+    ],
 ];
 ?>
 
 <div class="page-header">
     <h1>
-        <?php echo 'Контакты'; ?>
-        <small><?php echo 'добавление'; ?></small>
+        <?= Yii::t($this->aliasModule, 'Contacts'); ?>
+        <small><?= Yii::t($this->aliasModule, 'creation'); ?></small>
     </h1>
 </div>
 

@@ -1,47 +1,47 @@
 <?php
 $this->breadcrumbs = [
-    'Типы контактов' => [$this->patchBackend.'index'],
-    'Список',
+    Yii::t($this->aliasModule, 'Contact types') => [$this->patchBackend.'index'],
+    Yii::t($this->aliasModule, 'List'),
 ];
 
-$this->pageTitle = 'Список типов контактов';
+$this->pageTitle = Yii::t($this->aliasModule, 'List contact types');
 
 $this->menu = [
     [
-        'label' => 'Типы контактов',
+        'label' => Yii::t($this->aliasModule, 'Contacts'),
         'items' => [
             [
                 'icon' => 'list-alt',
-                'label' => 'Список типов',
-                'url' => [$this->patchBackend.'index']
-            ],
-            [
-                'icon' => 'plus-sign',
-                'label' => 'Добавить тип',
-                'url' => [$this->patchBackend.'create']
-            ],
-        ]
-    ],
-    [
-        'label' => 'Контакты',
-        'items' => [
-            [
-                'icon' => 'list-alt',
-                'label' => 'Список контактов',
+                'label' => Yii::t($this->aliasModule, 'List contacts'),
                 'url' => ['/contact/contactBackend/index']
             ],
         ]
     ],
+    [
+        'label' => Yii::t($this->aliasModule, 'Contact types'),
+        'items' => [
+            [
+                'icon' => 'list-alt',
+                'label' => Yii::t($this->aliasModule, 'List types'),
+                'url' => [$this->patchBackend.'index']
+            ],
+            [
+                'icon' => 'plus-sign',
+                'label' => Yii::t($this->aliasModule, 'Add type'),
+                'url' => [$this->patchBackend.'create']
+            ],
+        ]
+    ]
 ]; ?>
 
 <div class="page-header">
     <h1>
-        <?php echo 'Типы контактов'; ?>
-        <small><?php echo 'список'; ?></small>
+        <?= Yii::t($this->aliasModule, 'Contact types'); ?>
+        <small><?= Yii::t($this->aliasModule, 'list'); ?></small>
     </h1>
 </div>
 
-    <p><?php echo 'На данной странице представлены средства управления типами контактов.'; ?></p>
+    <p><?= Yii::t($this->aliasModule, 'Types management'); ?></p>
 
 <?php $this->widget('yupe\widgets\CustomGridView', [
     'id'           => 'contactType-grid',

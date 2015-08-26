@@ -7,11 +7,11 @@
         'htmlOptions'            => ['class' => 'well', 'enctype' => 'multipart/form-data'],
     ]
 ); ?>
-<?php echo $form->errorSummary($model); ?>
+<?= $form->errorSummary($model); ?>
 
 <div class="row">
     <div class="col-sm-7">
-        <?php echo $form->dropDownListGroup(
+        <?= $form->dropDownListGroup(
             $model,
             'type_id',
             [
@@ -29,7 +29,7 @@
 
 <div class="row">
     <div class="col-sm-7">
-        <?php echo $form->dropDownListGroup(
+        <?= $form->dropDownListGroup(
             $model,
             'category_id',
             [
@@ -49,7 +49,7 @@
 
 <div class="row">
     <div class="col-sm-7">
-        <?php echo $form->textFieldGroup(
+        <?= $form->textFieldGroup(
             $model,
             'name'
         ); ?>
@@ -76,7 +76,7 @@
             </div>
         <?php endif; ?>
 
-        <?php echo $form->fileFieldGroup(
+        <?= $form->fileFieldGroup(
             $model,
             'image',
             [
@@ -93,7 +93,7 @@
 
 <div class="row">
     <div class="col-sm-7">
-        <?php echo $form->textAreaGroup($model, 'data'); ?>
+        <?= $form->textAreaGroup($model, 'data'); ?>
     </div>
 </div>
 
@@ -104,7 +104,8 @@
     [
         'buttonType' => 'submit',
         'context'    => 'primary',
-        'label'      => $model->isNewRecord ? 'Создать и продолжить' : 'Сохранить и продолжить',
+        'label'      => $model->isNewRecord ?
+            Yii::t($this->aliasModule, 'Create and continue') : Yii::t($this->aliasModule, 'Save and continue'),
     ]
 ); ?>
 
@@ -113,7 +114,8 @@
     [
         'buttonType'  => 'submit',
         'htmlOptions' => ['name' => 'submit-type', 'value' => 'index'],
-        'label'       => $model->isNewRecord ? 'Создать и закрыть' : 'Сохранить и закрыть',
+        'label'       => $model->isNewRecord ?
+            Yii::t($this->aliasModule, 'Create and close') : Yii::t($this->aliasModule, 'Save and close'),
     ]
 ); ?>
 

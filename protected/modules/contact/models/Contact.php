@@ -154,7 +154,7 @@ class Contact extends yupe\models\YModel{
 
     public function getCategoryName()
     {
-        return ($this->category === null) ? '---' : $this->category->name;
+        return ($this->category === null) ? '---' :  '[' . $this->category->id . '] ' . $this->category->name;
     }
 
 } 

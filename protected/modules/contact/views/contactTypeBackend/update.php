@@ -1,25 +1,43 @@
 <?php
     $this->breadcrumbs = [
-        Yii::t($this->aliasModuleT, 'Типы контактов') => [$this->patchBackend.'index'],
+        Yii::t($this->aliasModule, 'Contact types') => [$this->patchBackend.'index'],
         $model->name => [$this->patchBackend.'view', 'id' => $model->id],
-        Yii::t($this->aliasModuleT, 'Редактирование'),
+        Yii::t($this->aliasModule, 'Editing'),
     ];
 
-    $this->pageTitle = Yii::t($this->aliasModuleT, 'Типы контактов - редактирование');
+    $this->pageTitle = Yii::t($this->aliasModule, 'Types contacts - editing');
 
     $this->menu = [
-        ['icon' => 'list-alt', 'label' => Yii::t($this->aliasModuleT, 'Список типов'),
-            'url' => [$this->patchBackend.'index']
+        [
+            'label' => Yii::t($this->aliasModule, 'Contact types'),
+            'items' => [
+                [
+                    'icon' => 'list-alt',
+                    'label' => Yii::t($this->aliasModule, 'List types'),
+                    'url' => [$this->patchBackend.'index']
+                ],
+                [
+                    'icon' => 'plus-sign',
+                    'label' => Yii::t($this->aliasModule, 'Add type'),
+                    'url' => [$this->patchBackend.'create']
+                ],
+            ]
         ],
-        ['icon' => 'plus-sign', 'label' => Yii::t($this->aliasModuleT, 'Добавить тип'),
-            'url' => [$this->patchBackend.'create']
+        [
+            'label' => Yii::t($this->aliasModule, 'Type') . ' «' . mb_substr($model->name, 0, 32) . '»'
         ],
-        ['label' => Yii::t('ContactModule.contacty', 'Тип') . ' «' . mb_substr($model->name, 0, 32) . '»'],
-        ['icon' => 'trash', 'label' => Yii::t($this->aliasModuleT, 'Удалить тип'),
+        [
+            'icon' => 'trash',
+            'label' => Yii::t($this->aliasModule, 'Delete type'),
             'url' => '#', 'linkOptions' => [
-                'submit' => [$this->patchBackend.'delete', 'id' => $model->id],
-                'params' => [Yii::app()->getRequest()->csrfTokenName => Yii::app()->getRequest()->csrfToken],
-                'confirm' => Yii::t($this->aliasModuleT, 'Вы действительно хотите удалить тип?'),
+                'submit' => [
+                    $this->patchBackend.'delete',
+                    'id' => $model->id
+                ],
+                'params' => [
+                    Yii::app()->getRequest()->csrfTokenName => Yii::app()->getRequest()->csrfToken
+                ],
+                'confirm' => Yii::t($this->aliasModule, 'Do you really want to remove the type?'),
                 'csrf' => true,
             ]
         ],
@@ -27,8 +45,8 @@
 ?>
 <div class="page-header">
     <h1>
-        <?php echo Yii::t($this->aliasModuleT, 'Редактирование типа контакта'); ?><br />
-        <small>&laquo;<?php echo $model->name; ?>&raquo;</small>
+        <?= Yii::t($this->aliasModule, 'Editing type'); ?><br />
+        <small>&laquo;<?= $model->name; ?>&raquo;</small>
     </h1>
 </div>
 

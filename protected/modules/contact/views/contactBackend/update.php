@@ -1,28 +1,53 @@
 <?php
     $this->breadcrumbs = [
-        'Контакты' => [$this->patchBackend.'index'],
+        Yii::t($this->aliasModule, 'Contacts') => [$this->patchBackend.'index'],
         $model->id => [$this->patchBackend.'view', 'id' => $model->id],
-        'Редактирование',
+        Yii::t($this->aliasModule, 'Editing'),
     ];
 
-    $this->pageTitle = 'Контакты - редактирование';
+    $this->pageTitle = Yii::t($this->aliasModule, 'Contacts - editing');
 
     $this->menu = [
-        ['icon' => 'list-alt', 'label' => 'Список контактов', 'url' => [$this->patchBackend.'index']],
-        ['icon' => 'plus-sign', 'label' => 'Добавить контакт', 'url' => [$this->patchBackend.'create']],
-        ['label' => 'Контакт' . ' «' . mb_substr($model->id, 0, 32) . '»'],
-        ['icon' => 'trash', 'label' => 'Удалить контакты', 'url' => '#', 'linkOptions' => [
-            'submit' => [$this->patchBackend.'delete', 'id' => $model->id],
-            'params' => [Yii::app()->getRequest()->csrfTokenName => Yii::app()->getRequest()->csrfToken],
-            'confirm' => 'Вы действительно хотите удалить контакты?',
-            'csrf' => true,
-        ]],
+        [
+            'label' => Yii::t($this->aliasModule, 'Contacts'),
+            'items' => [
+                [
+                    'icon' => 'list-alt',
+                    'label' => Yii::t($this->aliasModule, 'List contacts'),
+                    'url' => [$this->patchBackend.'index']
+                ],
+                [
+                    'icon' => 'plus-sign',
+                    'label' => Yii::t($this->aliasModule, 'Add contact'),
+                    'url' => [$this->patchBackend.'create']
+                ],
+            ]
+
+        ],
+        [
+            'label' => Yii::t($this->aliasModule, 'Contact') . ' «' . mb_substr($model->contactType->name . ' [' . $model->category->name . ']', 0, 32) . '»'
+        ],
+        [
+            'icon' => 'trash',
+            'label' => Yii::t($this->aliasModule, 'Delete contact'),
+            'url' => '#', 'linkOptions' => [
+                'submit' => [
+                    $this->patchBackend.'delete',
+                    'id' => $model->id
+                ],
+                'params' => [
+                    Yii::app()->getRequest()->csrfTokenName => Yii::app()->getRequest()->csrfToken
+                ],
+                'confirm' => Yii::t($this->aliasModule, 'Do you really want to remove the contact?'),
+                'csrf' => true,
+            ]
+        ],
     ];
 ?>
 <div class="page-header">
     <h1>
-        <?php echo 'Редактирование контактов'; ?><br />
-        <small>&laquo;<?php echo $model->id; ?>&raquo;</small>
+        <?= Yii::t($this->aliasModule, 'Contact editing'); ?><br />
+        <small>&laquo;<?= $model->contactType->name . ' [' . $model->category->name . ']'; ?>&raquo;</small>
     </h1>
 </div>
 
