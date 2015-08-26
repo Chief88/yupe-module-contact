@@ -16,15 +16,15 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
         $model->setAttributes(
             Yii::app()->getRequest()->getParam(
-                'ContactType', array()
+                'ContactType', []
             )
         );
 
         $this->render(
-            'index', array(
+            'index', [
                 'model' => $model,
                 'pages' => ContactType::model()->getAllPagesList(),
-            )
+            ]
         );
 	}
 
@@ -45,16 +45,16 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
                     $this->redirect(
                         (array)Yii::app()->getRequest()->getPost(
                             'submit-type',
-                            array('create')
+                            ['create']
                         )
                     );
                 }
 
         }
 
-        $this->render('create', array(
+        $this->render('create', [
             'model' => $model,
-        ));
+        ]);
 
 	}
 
@@ -80,7 +80,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
                 $this->redirect(
                     (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', array('update', 'id' => $model->id)
+                        'submit-type', ['update', 'id' => $model->id]
                     )
                 );
             }
@@ -89,9 +89,9 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
         if (Yii::app()->hasModule('menu')) {
 
             $menuItem = MenuItem::model()->findByAttributes(
-                array(
+                [
                     "title"=>$oldTitle
-                )
+                ]
             );
 
             if ($menuItem !== null) {
@@ -101,11 +101,11 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
         }
 
         $this->render(
-            'update', array(
+            'update', [
                 'model'        => $model,
                 'menuId'       =>$menuId,
                 'menuParentId' =>$menuParentId
-            )
+            ]
         );
 
     }

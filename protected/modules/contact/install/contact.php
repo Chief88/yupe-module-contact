@@ -6,16 +6,15 @@
  * @author Latyshkov
  *
  */
-return array(
-    'module'   => array(
+return [
+    'module'   => [
         'class'  => 'application.modules.contact.ContactModule',
-    ),
-    'import'    => array(
+    ],
+    'import'    => [
         'application.modules.contact.models.*',
-    ),
-    'component' => array(
-    ),
-    'rules'     => array(
+    ],
+    'component' => [],
+    'rules'     => [
         '/contacts/<alias>' => 'contact/contact/show',
-    ),
-);
+    ],
+];

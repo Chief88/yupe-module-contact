@@ -1,15 +1,15 @@
 <?php
-$this->breadcrumbs = array(
-    'Контакты' => array($this->patchBackend.'index'),
+$this->breadcrumbs = [
+    'Контакты' => [$this->patchBackend.'index'],
     'Добавление',
-);
+];
 
 $this->pageTitle = 'Добавить новые контакты';
 
-$this->menu = array(
-    array('icon' => 'list-alt', 'label' => 'Просмотреть список контактов',
-    'url' => array($this->patchBackend.'index')),
-);
+$this->menu = [
+    ['icon' => 'list-alt', 'label' => 'Просмотреть список контактов',
+    'url' => [$this->patchBackend.'index']],
+];
 ?>
 
 <div class="page-header">
@@ -20,6 +20,6 @@ $this->menu = array(
 </div>
 
 <?php
-$this->renderPartial('_form', array(
+$this->renderPartial('_form', [
     'model'=>$model,
-));
+]);

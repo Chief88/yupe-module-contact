@@ -25,11 +25,11 @@ class ContactType extends yupe\models\YModel{
      */
     public function attributeLabels()
     {
-        return array(
+        return [
             'name'              => 'Название типа контакта',
             'nameEn'            => 'Название типа контакта (En)',
             'validation'        => 'Тип валидации',
-        );
+        ];
     }
 
     /**
@@ -37,11 +37,11 @@ class ContactType extends yupe\models\YModel{
      */
     public function rules()
     {
-        return array(
-            array('name, nameEn, validation', 'required'),
-            array('name, nameEn, validation', 'length', 'max' => 150),
-            array('name, nameEn, validation', 'safe'),
-        );
+        return [
+            ['name, nameEn, validation', 'required'],
+            ['name, nameEn, validation', 'length', 'max' => 150],
+            ['name, nameEn, validation', 'safe'],
+        ];
     }
 
     /**
@@ -49,9 +49,9 @@ class ContactType extends yupe\models\YModel{
      */
     public function relations()
     {
-        return array(
-            'contact'  => array(self::BELONGS_TO, 'Contact', 'id'),
-        );
+        return [
+            'contact'  => [self::BELONGS_TO, 'Contact', 'id'],
+        ];
     }
 
     public function search()
@@ -62,9 +62,9 @@ class ContactType extends yupe\models\YModel{
         $criteria->compare('name', $this->name, true);
         $criteria->compare('validation', $this->validation, true);
 
-        return new CActiveDataProvider(get_class($this), array(
+        return new CActiveDataProvider(get_class($this), [
             'criteria' => $criteria,
-        ));
+        ]);
     }
 
     public function getAllPagesList($selfId = false)

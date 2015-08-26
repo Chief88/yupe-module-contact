@@ -16,7 +16,7 @@
  *
  * NOTE, this file must be saved in UTF-8 encoding.
  */
-return array(
+return [
     'Contacts categories'                                                  => 'Категории новостей',
     'News lists'                                                       => 'Списки новостей',
     'General module settings'                                          => 'Основные настройки модуля',
@@ -122,4 +122,4 @@ return array(
     'Contacts'                                                         => 'Контакты',
     'Module for creating and management contacts'                      => 'Модуль для создания и управления контактов',
 
-);
+];

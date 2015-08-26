@@ -16,15 +16,15 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
 
         $model->setAttributes(
             Yii::app()->getRequest()->getParam(
-                'Contact', array()
+                'Contact', []
             )
         );
 
         $this->render(
-            'index', array(
+            'index', [
                 'model' => $model,
                 'pages' => Contact::model()->getAllPagesList(),
-            )
+            ]
         );
 	}
 
@@ -39,16 +39,16 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
                 $this->redirect(
                     (array)Yii::app()->getRequest()->getPost(
                         'submit-type',
-                        array('create')
+                        ['create']
                     )
                 );
             }
         }
 
         $this->render(
-            'create', array(
+            'create', [
                 'model'        => $model,
-            )
+            ]
         );
 	}
 
@@ -74,7 +74,7 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
 
                 $this->redirect(
                     (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', array('update', 'id' => $model->id)
+                        'submit-type', ['update', 'id' => $model->id]
                     )
                 );
             }
@@ -83,9 +83,9 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
         if (Yii::app()->hasModule('menu')) {
 
             $menuItem = MenuItem::model()->findByAttributes(
-                array(
+                [
                     "title"=>$oldTitle
-                )
+                ]
             );
 
             if ($menuItem !== null) {
@@ -95,11 +95,11 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
         }
 
         $this->render(
-            'update', array(
+            'update', [
                 'model'        => $model,
                 'menuId'       =>$menuId,
                 'menuParentId' =>$menuParentId
-            )
+            ]
         );
 
     }

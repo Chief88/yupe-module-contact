@@ -17,30 +17,30 @@ class ContactModule extends WebModule
     public  $aliasModule = 'ContactModule.contact';
     public  $patchBackend = '/contact/contactBackend/';
 
-    public  $validates = array(
-        array(
+    public  $validates = [
+        [
             'type' => 'none',
             'title' => 'Без валидации'
-        ),
-        array(
+        ],
+        [
             'type' => 'phone',
             'title' => 'Телефон'
-        ),
-        array(
+        ],
+        [
             'type' => 'email',
             'title' => 'E-mail'
-        ),
-        array(
+        ],
+        [
             'type' => 'integer',
             'title' => 'Целое число'
-        ),
-    );
+        ],
+    ];
 
     public function getDependencies()
     {
-        return array(
+        return [
             'category',
-        );
+        ];
     }
 
     public function getInstall()
@@ -54,31 +54,31 @@ class ContactModule extends WebModule
 
     public function getParamsLabels()
     {
-        return array(
+        return [
             'mainCategory'      => Yii::t($this->aliasModule, 'Main contacts category'),
             'adminMenuOrder'    => Yii::t($this->aliasModule, 'Menu items order')
-        );
+        ];
     }
 
     public function getEditableParams()
     {
-        return array(
+        return [
             'adminMenuOrder',
             'mainCategory' => CHtml::listData($this->getCategoryList(), 'id', 'name'),
-        );
+        ];
     }
 
     public function getEditableParamsGroups()
     {
-        return array(
-            'main'   => array(
+        return [
+            'main'   => [
                 'label' => Yii::t($this->aliasModule, 'General module settings'),
-                'items' => array(
+                'items' => [
                     'adminMenuOrder',
                     'mainCategory'
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 
     public function getVersion()
@@ -108,7 +108,7 @@ class ContactModule extends WebModule
 
     public function getAuthor()
     {
-        return Yii::t($this->aliasModule, 'Sergey Latyshkov');
+        return Yii::t($this->aliasModule, 'Adelfo-Studio');
     }
 
     public function getAuthorEmail()
@@ -118,7 +118,7 @@ class ContactModule extends WebModule
 
     public function getUrl()
     {
-        return Yii::t($this->aliasModule, 'https://github.com/Chief88/yupe-module-contact.git');
+        return Yii::t($this->aliasModule, 'http://adelfo-studio.ru/');
     }
 
     public function getIcon()
@@ -133,18 +133,18 @@ class ContactModule extends WebModule
 
     public function getNavigation()
     {
-        return array(
-            array(
+        return [
+            [
                 'icon'  => 'fa fa-fw fa-list-alt',
                 'label' => Yii::t($this->aliasModule, 'Contacts list'),
-                'url'   => array($this->patchBackend.'index')
-            ),
-            array(
+                'url'   => [$this->patchBackend.'index']
+            ],
+            [
                 'icon'  => 'fa fa-fw fa-plus-square',
                 'label' => Yii::t($this->aliasModule, 'Create contact'),
-                'url'   => array($this->patchBackend.'create')
-            ),
-        );
+                'url'   => [$this->patchBackend.'create']
+            ],
+        ];
     }
 
     public function init()
@@ -152,9 +152,9 @@ class ContactModule extends WebModule
         parent::init();
 
         $this->setImport(
-            array(
+            [
                 'contact.models.*'
-            )
+            ]
         );
     }
 

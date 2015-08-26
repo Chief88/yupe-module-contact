@@ -1,36 +1,38 @@
 <?php
-$this->breadcrumbs = array(
-    'Типы контактов' => array($this->patchBackend.'index'),
+$this->breadcrumbs = [
+    'Типы контактов' => [$this->patchBackend.'index'],
     'Список',
-);
+];
 
 $this->pageTitle = 'Список типов контактов';
 
-$this->menu = array(
-    array(
+$this->menu = [
+    [
         'label' => 'Типы контактов',
-        'items' => array(
-            array('icon' => 'list-alt',
+        'items' => [
+            [
+                'icon' => 'list-alt',
                 'label' => 'Список типов',
-                'url' => array($this->patchBackend.'index')
-            ),
-            array('icon' => 'plus-sign',
+                'url' => [$this->patchBackend.'index']
+            ],
+            [
+                'icon' => 'plus-sign',
                 'label' => 'Добавить тип',
-                'url' => array($this->patchBackend.'create')
-            ),
-        )
-    ),
-    array(
+                'url' => [$this->patchBackend.'create']
+            ],
+        ]
+    ],
+    [
         'label' => 'Контакты',
-        'items' => array(
-            array(
+        'items' => [
+            [
                 'icon' => 'list-alt',
                 'label' => 'Список контактов',
-                'url' => array('/contact/contactBackend/index')
-            ),
-        )
-    ),
-); ?>
+                'url' => ['/contact/contactBackend/index']
+            ],
+        ]
+    ],
+]; ?>
 
 <div class="page-header">
     <h1>
@@ -41,26 +43,26 @@ $this->menu = array(
 
     <p><?php echo 'На данной странице представлены средства управления типами контактов.'; ?></p>
 
-<?php $this->widget('yupe\widgets\CustomGridView', array(
+<?php $this->widget('yupe\widgets\CustomGridView', [
     'id'           => 'contactType-grid',
     'dataProvider' => $model->search(),
     'filter'       => $model,
     'sortField'    => 'name',
-    'columns'      => array(
+    'columns'      => [
         'name',
-        array(
+        [
             'name'   => 'validation',
             'value'  => '$data->getTitleValidation()',
             'filter' => CHtml::activeDropDownList(
                 $model,
                 'validation',
                 $model->getListValidates(),
-                array('class' => 'form-control', 'encode' => false, 'empty' => '')
+                ['class' => 'form-control', 'encode' => false, 'empty' => '']
             ),
-        ),
-        array(
+        ],
+        [
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template'    => '{update}{delete}',
-        ),
-    ),
-)); ?>
+        ],
+    ],
+]); ?>

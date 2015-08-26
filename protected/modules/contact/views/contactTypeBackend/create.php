@@ -1,17 +1,17 @@
 <?php
-$this->breadcrumbs = array(
-    Yii::t($this->aliasModuleT, 'Типы контактов') => array($this->patchBackend.'index'),
+$this->breadcrumbs = [
+    Yii::t($this->aliasModuleT, 'Типы контактов') => [$this->patchBackend.'index'],
     Yii::t($this->aliasModuleT, 'Добавление'),
-);
+];
 
 $this->pageTitle = 'Добавить новый тип контакта';
 
-$this->menu = array(
-    array('icon' => 'list-alt', 'label' => Yii::t(
+$this->menu = [
+    ['icon' => 'list-alt', 'label' => Yii::t(
         $this->aliasModuleT, 'Список типов'),
-        'url' => array($this->patchBackend.'index')
-    ),
-);
+        'url' => [$this->patchBackend.'index']
+    ],
+];
 ?>
 
 <div class="page-header">
@@ -22,6 +22,6 @@ $this->menu = array(
 </div>
 
 <?php
-$this->renderPartial('_form', array(
+$this->renderPartial('_form', [
     'model'=>$model,
-));
+]);

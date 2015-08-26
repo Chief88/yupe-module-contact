@@ -8,7 +8,7 @@ class ContactController extends yupe\components\controllers\FrontController{
 
         $categoryModel = '';
         if (\Yii::app()->hasModule('category')) {
-            $categoryModel = \Category::model()->findByAttributes(array('slug' => 'stranica-kontakty'));
+            $categoryModel = \Category::model()->findByAttributes(['slug' => 'stranica-kontakty']);
         }
 
         $this->render('index', [
@@ -18,23 +18,21 @@ class ContactController extends yupe\components\controllers\FrontController{
     
     public function actionShow($alias){
 
-        $category = \Category::model()->findByAttributes( array('alias' => $alias));
+        $category = \Category::model()->findByAttributes( ['alias' => $alias]);
 
         $criteria = new CDbCriteria();
         $criteria->with[] = 'category';
         $criteria->condition = 'category.alias = :alias';
-        $criteria->params = array(
+        $criteria->params = [
             ':alias' => $alias,
-        );
+        ];
 
         $contacts = Contact::model()->findAll($criteria);
 
-        $this->render(
-            'show',
-            array(
+        $this->render('show', [
                 'contacts' => $contacts,
                 'category' => $category,
-                )
+            ]
         );
     }
 

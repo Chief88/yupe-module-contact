@@ -1,36 +1,38 @@
 <?php
-$this->breadcrumbs = array(
-    'Контакты' => array($this->patchBackend.'index'),
+$this->breadcrumbs = [
+    'Контакты' => [$this->patchBackend.'index'],
     'Список',
-);
+];
 
 $this->pageTitle = 'Список контактов';
 
-$this->menu = array(
-    array(
+$this->menu = [
+    [
         'label' => 'Контакты',
-        'items' => array(
-            array('icon' => 'list-alt',
+        'items' => [
+            [
+                'icon' => 'list-alt',
                 'label' => 'Список контактов',
-                'url' => array($this->patchBackend.'index')
-            ),
-            array('icon' => 'plus-sign',
+                'url' => [$this->patchBackend.'index']
+            ],
+            [
+                'icon' => 'plus-sign',
                 'label' => 'Добавить контакт',
-                'url' => array($this->patchBackend.'create')
-            ),
-        )
-    ),
-    array(
+                'url' => [$this->patchBackend.'create']
+            ],
+        ]
+    ],
+    [
         'label' => 'Типы контактов',
-        'items' => array(
-            array(
+        'items' => [
+            [
                 'icon' => 'list-alt',
                 'label' => 'Список типов',
-                'url' => array('/contact/contactTypeBackend/index')
-            ),
-        )
-    ),
-);
+                'url' => ['/contact/contactTypeBackend/index']
+            ],
+        ]
+    ],
+];
 ?>
 
 <div class="page-header">
@@ -42,37 +44,41 @@ $this->menu = array(
 
     <p><?php echo 'На данной странице представлены средства управления контактами.'; ?></p>
 
-<?php $this->widget('yupe\widgets\CustomGridView', array(
+<?php $this->widget('yupe\widgets\CustomGridView', [
     'id'           => 'contact-grid',
     'dataProvider' => $model->search(),
     'filter'       => $model,
     'sortField'    => 'type_id',
-    'columns'      => array(
-        array(
+    'columns'      => [
+        [
             'name'   => 'type_id',
             'value'  => '$data->contactType->name',
             'filter' => CHtml::activeDropDownList(
                 $model,
                 'type_id',
                 ContactType::model()->getListNameType(),
-                array('class' => 'form-control', 'encode' => false, 'empty' => '')
+                ['class' => 'form-control', 'encode' => false, 'empty' => '']
             ),
-        ),
+        ],
         'name',
-        array(
+        [
             'name'   => 'category_id',
             'value'  => '$data->getCategoryName()',
             'filter' => CHtml::activeDropDownList(
                 $model,
                 'category_id',
                 Category::model()->getFormattedList(Yii::app()->getModule('contact')->mainCategory),
-                array('class' => 'form-control', 'encode' => false, 'empty' => '')
+                ['class' => 'form-control', 'encode' => false, 'empty' => '']
             )
-        ),
-        'data',
-        array(
+        ],
+        [
+            'name'   => 'data',
+            'value'  => '$data->data',
+            'type'   => 'raw'
+        ],
+        [
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template'    => '{update}{delete}',
-        ),
-    ),
-)); ?>
+        ],
+    ],
+]); ?>

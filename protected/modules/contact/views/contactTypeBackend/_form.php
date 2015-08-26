@@ -8,13 +8,13 @@
 </script>
 
 <? $form = $this->beginWidget(
-'bootstrap.widgets.TbActiveForm', array(
+'bootstrap.widgets.TbActiveForm', [
     'id'                     => 'contactType-form',
     'enableAjaxValidation'   => false,
     'enableClientValidation' => true,
     'type'                   => 'vertical',
-    'htmlOptions'            => array('class' => 'well', 'enctype' => 'multipart/form-data'),
-)
+    'htmlOptions'            => ['class' => 'well', 'enctype' => 'multipart/form-data'],
+]
 ); ?>
 <?php echo $form->errorSummary($model); ?>
 
@@ -35,15 +35,15 @@
         <?php echo $form->dropDownListGroup(
             $model,
             'validation',
-            array(
-                'widgetOptions' => array(
+            [
+                'widgetOptions' => [
                     'data'        => $model->getListValidates(),
-                    'htmlOptions' => array(
+                    'htmlOptions' => [
                         'empty'  => '--Выбрать--',
                         'encode' => false
-                    ),
-                ),
-            )
+                    ],
+                ],
+            ]
         ); ?>
     </div>
 </div>

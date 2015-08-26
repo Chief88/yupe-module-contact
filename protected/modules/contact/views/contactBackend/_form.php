@@ -1,11 +1,11 @@
 <? $form = $this->beginWidget(
-    'bootstrap.widgets.TbActiveForm', array(
+    'bootstrap.widgets.TbActiveForm', [
         'id'                     => 'contact-form',
         'enableAjaxValidation'   => false,
         'enableClientValidation' => true,
         'type'                   => 'vertical',
-        'htmlOptions'            => array('class' => 'well', 'enctype' => 'multipart/form-data'),
-    )
+        'htmlOptions'            => ['class' => 'well', 'enctype' => 'multipart/form-data'],
+    ]
 ); ?>
 <?php echo $form->errorSummary($model); ?>
 
@@ -14,15 +14,15 @@
         <?php echo $form->dropDownListGroup(
             $model,
             'type_id',
-            array(
-                'widgetOptions' => array(
+            [
+                'widgetOptions' => [
                     'data'        => ContactType::model()->getListTypeContact(),
-                    'htmlOptions' => array(
+                    'htmlOptions' => [
                         'empty'  => '--Выбрать--',
                         'encode' => false
-                    ),
-                ),
-            )
+                    ],
+                ],
+            ]
         ); ?>
     </div>
 </div>
@@ -32,17 +32,17 @@
         <?php echo $form->dropDownListGroup(
             $model,
             'category_id',
-            array(
-                'widgetOptions' => array(
+            [
+                'widgetOptions' => [
                     'data'        => Category::model()->getFormattedList(
                         (int)Yii::app()->getModule('contact')->mainCategory
                     ),
-                    'htmlOptions' => array(
+                    'htmlOptions' => [
                         'empty'  => Yii::t('ContactModule.contact', '--choose--'),
                         'encode' => false
-                    ),
-                ),
-            )
+                    ],
+                ],
+            ]
         ); ?>
     </div>
 </div>
@@ -101,20 +101,20 @@
 
 <?php $this->widget(
     'bootstrap.widgets.TbButton',
-    array(
+    [
         'buttonType' => 'submit',
         'context'    => 'primary',
         'label'      => $model->isNewRecord ? 'Создать и продолжить' : 'Сохранить и продолжить',
-    )
+    ]
 ); ?>
 
 <?php $this->widget(
     'bootstrap.widgets.TbButton',
-    array(
+    [
         'buttonType'  => 'submit',
-        'htmlOptions' => array('name' => 'submit-type', 'value' => 'index'),
+        'htmlOptions' => ['name' => 'submit-type', 'value' => 'index'],
         'label'       => $model->isNewRecord ? 'Создать и закрыть' : 'Сохранить и закрыть',
-    )
+    ]
 ); ?>
 
 <?php $this->endWidget(); ?>
