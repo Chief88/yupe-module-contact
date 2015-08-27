@@ -8,11 +8,6 @@
                 $wrapperHtmlOptions = $params['wrapperHtmlOptions'];
             }
 
-            $wrapperHtmlOptionsString = '';
-            foreach($wrapperHtmlOptions as $key => $option ){
-                $wrapperHtmlOptionsString .= $key.'=\''.$option.'\' ';
-            }
-
         }
 
         if( isset($params['itemsWrapper']) && !empty($params['itemsWrapper']) ){
@@ -22,18 +17,15 @@
                 $htmlOptions = $params['htmlOptions'];
             }
 
-            $htmlOptionsString = '';
-            foreach($htmlOptions as $key => $option ){
-                $htmlOptionsString .= $key.'=\''.$option.'\' ';
-            }
-
         }
 
         foreach($contacts as $i =>$contact){
 
-            $item = $contact->contactType->validation == 'email' ? '<a href="mailto:'.$contact->data.'">'.$contact->data.'</a>' : $contact->data;
+            $item = $contact->contactType->validation == 'email' ?
+                CHtml::link($contact->data, 'mailto:' . $contact->data) : $contact->data;
 
-            $list .= isset($wrapper) ? '<'. $wrapper .' '. $wrapperHtmlOptionsString .'>'.$item.'</'.$wrapper.'>' : $item;
+            $list .= isset($wrapper) ?
+                CHtml::openTag($wrapper, $wrapperHtmlOptions) . $item . CHtml::closeTag($wrapper) : $item;
 
             if($i + 1 < count($contacts)){
                 $list .= $itemDelimiter;
@@ -43,6 +35,7 @@
         $list = isset($params['itemsPrefix']) ? $params['itemsPrefix'].$list : $list;
         $list = isset($params['itemsPostfix']) ? $list.$params['itemsPostfix'] : $list;
 
-        echo isset($itemsWrapper) ? '<'. $itemsWrapper .' '. $htmlOptionsString .'>'.$list.'</'.$itemsWrapper.'>' : $list; ?>
+        echo isset($itemsWrapper) ?
+            CHtml::openTag($itemsWrapper, $htmlOptions) . $list . CHtml::closeTag($itemsWrapper) : $list;?>
 
 <?php endif; ?>
