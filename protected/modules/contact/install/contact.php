@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Файл конфигурации модуля city
+ * Файл конфигурации модуля contact
  *
  * @author Latyshkov
  *
@@ -15,6 +15,7 @@ return [
     ],
     'component' => [],
     'rules'     => [
-        '/contacts/<alias>' => 'contact/contact/show',
+        '/contact/' => 'contact/contact/index',
+        '/contact/<alias>' => 'contact/contact/show',
     ],
 ];
