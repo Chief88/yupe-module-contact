@@ -190,7 +190,7 @@ class ContactModule extends WebModule
             ],
             [
                 'name'        => 'Contact.ContactTypeManager',
-                'description' => Yii::t($this->aliasModule, 'Manage types contacts'),
+                'description' => Yii::t($this->aliasModule, 'Manage contacts types'),
                 'type'        => AuthItem::TYPE_TASK,
                 'items'       => [
                     [
