@@ -9,6 +9,18 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
     public   $aliasModule = 'ContactModule.contact';
     public   $patchBackend = '/contact/contactBackend/';
 
+    public function accessRules()
+    {
+        return [
+            ['allow', 'roles' => ['admin']],
+            ['allow', 'actions' => ['index'], 'roles' => ['Contact.ContactBackend.Index']],
+            ['allow', 'actions' => ['create'], 'roles' => ['Contact.ContactBackend.Create']],
+            ['allow', 'actions' => ['update'], 'roles' => ['Contact.ContactBackend.Update']],
+            ['allow', 'actions' => ['delete', 'multiaction'], 'roles' => ['Contact.ContactBackend.Delete']],
+            ['deny']
+        ];
+    }
+
 	public function actionIndex(){
         $model = new Contact('search');
 
@@ -16,15 +28,15 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
 
         $model->setAttributes(
             Yii::app()->getRequest()->getParam(
-                'Contact', []
+                'Contact', array()
             )
         );
 
         $this->render(
-            'index', [
+            'index', array(
                 'model' => $model,
                 'pages' => Contact::model()->getAllPagesList(),
-            ]
+            )
         );
 	}
 
@@ -39,16 +51,16 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
                 $this->redirect(
                     (array)Yii::app()->getRequest()->getPost(
                         'submit-type',
-                        ['create']
+                        array('create')
                     )
                 );
             }
         }
 
         $this->render(
-            'create', [
+            'create', array(
                 'model'        => $model,
-            ]
+            )
         );
 	}
 
@@ -74,7 +86,7 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
 
                 $this->redirect(
                     (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', ['update', 'id' => $model->id]
+                        'submit-type', array('update', 'id' => $model->id)
                     )
                 );
             }
@@ -83,9 +95,9 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
         if (Yii::app()->hasModule('menu')) {
 
             $menuItem = MenuItem::model()->findByAttributes(
-                [
+                array(
                     "title"=>$oldTitle
-                ]
+                )
             );
 
             if ($menuItem !== null) {
@@ -95,11 +107,11 @@ class ContactBackendController extends yupe\components\controllers\BackControlle
         }
 
         $this->render(
-            'update', [
+            'update', array(
                 'model'        => $model,
                 'menuId'       =>$menuId,
                 'menuParentId' =>$menuParentId
-            ]
+            )
         );
 
     }

@@ -17,30 +17,30 @@ class ContactModule extends WebModule
     public  $aliasModule = 'ContactModule.contact';
     public  $patchBackend = '/contact/contactBackend/';
 
-    public  $validates = [
-        [
+    public  $validates = array(
+        array(
             'type' => 'none',
             'title' => 'Без валидации'
-        ],
-        [
+        ),
+        array(
             'type' => 'phone',
             'title' => 'Телефон'
-        ],
-        [
+        ),
+        array(
             'type' => 'email',
             'title' => 'E-mail'
-        ],
-        [
+        ),
+        array(
             'type' => 'integer',
             'title' => 'Целое число'
-        ],
-    ];
+        ),
+    );
 
     public function getDependencies()
     {
-        return [
+        return array(
             'category',
-        ];
+        );
     }
 
     public function getInstall()
@@ -54,31 +54,31 @@ class ContactModule extends WebModule
 
     public function getParamsLabels()
     {
-        return [
+        return array(
             'mainCategory'      => Yii::t($this->aliasModule, 'Main contacts category'),
             'adminMenuOrder'    => Yii::t($this->aliasModule, 'Menu items order')
-        ];
+        );
     }
 
     public function getEditableParams()
     {
-        return [
+        return array(
             'adminMenuOrder',
             'mainCategory' => CHtml::listData($this->getCategoryList(), 'id', 'name'),
-        ];
+        );
     }
 
     public function getEditableParamsGroups()
     {
-        return [
-            'main'   => [
+        return array(
+            'main'   => array(
                 'label' => Yii::t($this->aliasModule, 'General module settings'),
-                'items' => [
+                'items' => array(
                     'adminMenuOrder',
                     'mainCategory'
-                ]
-            ],
-        ];
+                )
+            ),
+        );
     }
 
     public function getVersion()
@@ -108,7 +108,7 @@ class ContactModule extends WebModule
 
     public function getAuthor()
     {
-        return Yii::t($this->aliasModule, 'Sergey Latyshkov');
+        return Yii::t($this->aliasModule, 'Adelfo-Studio');
     }
 
     public function getAuthorEmail()
@@ -118,7 +118,7 @@ class ContactModule extends WebModule
 
     public function getUrl()
     {
-        return Yii::t($this->aliasModule, 'https://github.com/Chief88/yupe-module-contact.git');
+        return Yii::t($this->aliasModule, 'http://adelfo-studio.ru/');
     }
 
     public function getIcon()
@@ -133,18 +133,18 @@ class ContactModule extends WebModule
 
     public function getNavigation()
     {
-        return [
-            [
+        return array(
+            array(
                 'icon'  => 'fa fa-fw fa-list-alt',
                 'label' => Yii::t($this->aliasModule, 'Contacts list'),
-                'url'   => [$this->patchBackend.'index']
-            ],
-            [
+                'url'   => array($this->patchBackend.'index')
+            ),
+            array(
                 'icon'  => 'fa fa-fw fa-plus-square',
                 'label' => Yii::t($this->aliasModule, 'Create contact'),
-                'url'   => [$this->patchBackend.'create']
-            ],
-        ];
+                'url'   => array($this->patchBackend.'create')
+            ),
+        );
     }
 
     public function init()
@@ -152,10 +152,70 @@ class ContactModule extends WebModule
         parent::init();
 
         $this->setImport(
-            [
+            array(
                 'contact.models.*'
-            ]
+            )
         );
+    }
+
+    public function getAuthItems()
+    {
+        return [
+            [
+                'name'        => 'Contact.ContactManager',
+                'description' => Yii::t($this->aliasModule, 'Manage contacts'),
+                'type'        => AuthItem::TYPE_TASK,
+                'items'       => [
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactBackend.Create',
+                        'description' => Yii::t($this->aliasModule, 'Creating contacts')
+                    ],
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactBackend.Delete',
+                        'description' => Yii::t($this->aliasModule, 'Removing contacts')
+                    ],
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactBackend.Index',
+                        'description' => Yii::t($this->aliasModule, 'List of contacts')
+                    ],
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactBackend.Update',
+                        'description' => Yii::t($this->aliasModule, 'Editing contacts')
+                    ],
+                ]
+            ],
+            [
+                'name'        => 'Contact.ContactTypeManager',
+                'description' => Yii::t($this->aliasModule, 'Manage types contacts'),
+                'type'        => AuthItem::TYPE_TASK,
+                'items'       => [
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactTypeBackend.Create',
+                        'description' => Yii::t($this->aliasModule, 'Creating type contacts')
+                    ],
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactTypeBackend.Delete',
+                        'description' => Yii::t($this->aliasModule, 'Removing type contacts')
+                    ],
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactTypeBackend.Index',
+                        'description' => Yii::t($this->aliasModule, 'List of types contacts')
+                    ],
+                    [
+                        'type'        => AuthItem::TYPE_OPERATION,
+                        'name'        => 'Contact.ContactTypeBackend.Update',
+                        'description' => Yii::t($this->aliasModule, 'Editing type contacts')
+                    ],
+                ]
+            ]
+        ];
     }
 
 }

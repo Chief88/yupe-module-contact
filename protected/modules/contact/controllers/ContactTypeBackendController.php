@@ -6,8 +6,20 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 {
     private $_model;
 
-    public   $aliasModule = 'ContactModule.contact';
+    public   $aliasModuleT = 'ContactModule.contact';
     public   $patchBackend = '/contact/contactTypeBackend/';
+
+    public function accessRules()
+    {
+        return [
+            ['allow', 'roles' => ['admin']],
+            ['allow', 'actions' => ['index'], 'roles' => ['Contact.ContactTypeBackend.Index']],
+            ['allow', 'actions' => ['create'], 'roles' => ['Contact.ContactTypeBackend.Create']],
+            ['allow', 'actions' => ['update'], 'roles' => ['Contact.ContactTypeBackend.Update']],
+            ['allow', 'actions' => ['delete', 'multiaction'], 'roles' => ['Contact.ContactTypeBackend.Delete']],
+            ['deny']
+        ];
+    }
 
 	public function actionIndex(){
         $model = new ContactType('search');
@@ -16,15 +28,15 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
         $model->setAttributes(
             Yii::app()->getRequest()->getParam(
-                'ContactType', []
+                'ContactType', array()
             )
         );
 
         $this->render(
-            'index', [
+            'index', array(
                 'model' => $model,
                 'pages' => ContactType::model()->getAllPagesList(),
-            ]
+            )
         );
 	}
 
@@ -39,22 +51,22 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
                     Yii::app()->user->setFlash(
                         yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
-                        Yii::t($this->aliasModule, 'Тип контакта создан!')
+                        Yii::t($this->aliasModuleT, 'Тип контакта создан!')
                     );
 
                     $this->redirect(
                         (array)Yii::app()->getRequest()->getPost(
                             'submit-type',
-                            ['create']
+                            array('create')
                         )
                     );
                 }
 
         }
 
-        $this->render('create', [
+        $this->render('create', array(
             'model' => $model,
-        ]);
+        ));
 
 	}
 
@@ -75,12 +87,12 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
                 Yii::app()->user->setFlash(
                     yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t($this->aliasModule, 'Контакты обновлены!')
+                    Yii::t($this->aliasModuleT, 'Контакты обновлены!')
                 );
 
                 $this->redirect(
                     (array) Yii::app()->getRequest()->getPost(
-                        'submit-type', ['update', 'id' => $model->id]
+                        'submit-type', array('update', 'id' => $model->id)
                     )
                 );
             }
@@ -89,9 +101,9 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
         if (Yii::app()->hasModule('menu')) {
 
             $menuItem = MenuItem::model()->findByAttributes(
-                [
+                array(
                     "title"=>$oldTitle
-                ]
+                )
             );
 
             if ($menuItem !== null) {
@@ -101,11 +113,11 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
         }
 
         $this->render(
-            'update', [
+            'update', array(
                 'model'        => $model,
                 'menuId'       =>$menuId,
                 'menuParentId' =>$menuParentId
-            ]
+            )
         );
 
     }
@@ -120,7 +132,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
             Yii::app()->user->setFlash(
                 yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
-                Yii::t($this->aliasModule, 'Контакты успешно удалены!')
+                Yii::t($this->aliasModuleT, 'Контакты успешно удалены!')
             );
 
             // если это AJAX запрос ( кликнули удаление в админском grid view), мы не должны никуда редиректить
@@ -130,7 +142,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
         } else {
             throw new CHttpException(
                 404,
-                Yii::t($this->aliasModule, 'Bad request. Please don\'t repeat similar requests anymore!')
+                Yii::t($this->aliasModuleT, 'Bad request. Please don\'t repeat similar requests anymore!')
             );
         }
     }
@@ -142,7 +154,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
             if (($this->_model = ContactType::model()->findByPk($id)) === null) {
                 throw new CHttpException(
                     404,
-                    Yii::t($this->aliasModule, 'Page was not found')
+                    Yii::t($this->aliasModuleT, 'Page was not found')
                 );
             }
         }
