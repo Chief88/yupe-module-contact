@@ -6,7 +6,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 {
     private $_model;
 
-    public   $aliasModuleT = 'ContactModule.contact';
+    public   $aliasModule = 'ContactModule.contact';
     public   $patchBackend = '/contact/contactTypeBackend/';
 
     public function accessRules()
@@ -51,7 +51,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
                     Yii::app()->user->setFlash(
                         yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
-                        Yii::t($this->aliasModuleT, 'Тип контакта создан!')
+                        Yii::t($this->aliasModule, 'Тип контакта создан!')
                     );
 
                     $this->redirect(
@@ -87,7 +87,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
                 Yii::app()->user->setFlash(
                     yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
-                    Yii::t($this->aliasModuleT, 'Контакты обновлены!')
+                    Yii::t($this->aliasModule, 'Контакты обновлены!')
                 );
 
                 $this->redirect(
@@ -132,7 +132,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
 
             Yii::app()->user->setFlash(
                 yupe\widgets\YFlashMessages::SUCCESS_MESSAGE,
-                Yii::t($this->aliasModuleT, 'Контакты успешно удалены!')
+                Yii::t($this->aliasModule, 'Контакты успешно удалены!')
             );
 
             // если это AJAX запрос ( кликнули удаление в админском grid view), мы не должны никуда редиректить
@@ -142,7 +142,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
         } else {
             throw new CHttpException(
                 404,
-                Yii::t($this->aliasModuleT, 'Bad request. Please don\'t repeat similar requests anymore!')
+                Yii::t($this->aliasModule, 'Bad request. Please don\'t repeat similar requests anymore!')
             );
         }
     }
@@ -154,7 +154,7 @@ class ContactTypeBackendController extends yupe\components\controllers\BackContr
             if (($this->_model = ContactType::model()->findByPk($id)) === null) {
                 throw new CHttpException(
                     404,
-                    Yii::t($this->aliasModuleT, 'Page was not found')
+                    Yii::t($this->aliasModule, 'Page was not found')
                 );
             }
         }
