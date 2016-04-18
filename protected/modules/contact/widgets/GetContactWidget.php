@@ -46,11 +46,22 @@ class GetContactWidget extends yupe\widgets\YWidget
 			$criteria->limit = $this->limit;
 		}
 
+		$mainCondition = $criteria->condition;
+		$mainParams = $criteria->params;
 		if($this->controller->isMultilang()){
 			$criteria->addInCondition('t.lang', [Yii::app()->language]);
 		}
 
 		$contacts = Contact::model()->findAll($criteria);
+
+		if(count($contacts) == 0){
+			if($this->controller->isMultilang()){
+				$criteria->condition = $mainCondition;
+				$criteria->params = $mainParams;
+				$criteria->addInCondition('t.lang', [$this->controller->yupe->defaultLanguage]);
+				$contacts = Contact::model()->findAll($criteria);
+			}
+		}
 
 		$this->render($this->view, [
 			'contacts' => $contacts,
