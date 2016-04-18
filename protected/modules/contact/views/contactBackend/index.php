@@ -77,6 +77,11 @@ $this->menu = [
             'type'   => 'raw'
         ],
         [
+            'name'   => 'lang',
+            'value'  => '$data->lang',
+            'filter' => $this->yupe->getLanguagesList()
+        ],
+        [
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template'    => '{update}{delete}',
         ],
